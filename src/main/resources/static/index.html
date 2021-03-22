@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Użytkownicy</title>
+</head>
+<body>
+    <h2>Dodaj użytkownika</h2>
+    <form action="/add">
+        <label>
+            <input type="text" name="firstName" placeholder="Imię">
+        </label>
+        <label>
+            <input type="text" name="lastName" placeholder="Nazwisko">
+        </label>
+        <label>
+            <input type="number" name="age" placeholder="Wiek" min="0" max="110">
+        </label>
+        <input type="submit" value="Dodaj">
+    </form>
+    <button><a href="/users">Wyświetl użytkowników</a></button>
+</body>
+</html>
