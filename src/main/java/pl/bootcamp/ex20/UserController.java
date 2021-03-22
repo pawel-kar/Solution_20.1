@@ -11,9 +11,9 @@ class UserController {
         this.userList = userList;
     }
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     String hello(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int age) {
-        if (areNamesValid(firstName, lastName)) {
+        if (isFilled(firstName)) {
             userList.addUser(new User(firstName, lastName, age));
             return "redirect:/success.html";
         } else {
@@ -21,8 +21,8 @@ class UserController {
         }
     }
 
-    private boolean areNamesValid(String firstName, String lastName) {
-        return !firstName.equals("") && !lastName.equals("");
+    private boolean isFilled(String firstName) {
+        return !firstName.equals("");
     }
 
     @ResponseBody
