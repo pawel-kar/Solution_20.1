@@ -5,16 +5,16 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 class UserController {
-    UserRepository userList;
+    private final UserRepository userRepository;
 
-    UserController(UserRepository userList) {
-        this.userList = userList;
+    UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    @PostMapping("/add")
-    String hello(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int age) {
+    @RequestMapping("/add")
+    String addUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int age) {
         if (isFilled(firstName)) {
-            userList.addUser(new User(firstName, lastName, age));
+            userRepository.addUser(new User(firstName, lastName, age));
             return "redirect:/success.html";
         } else {
             return "redirect:/error.html";
@@ -29,7 +29,7 @@ class UserController {
     @GetMapping("/users")
     String printUsers() {
         StringBuilder users = new StringBuilder();
-        for (User user : userList.getUserList()) {
+        for (User user : userRepository.getUserList()) {
             users.append(user).append("</br>");
         }
         return users.toString();
