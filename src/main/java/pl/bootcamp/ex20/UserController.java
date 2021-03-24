@@ -12,13 +12,14 @@ class UserController {
     }
 
     @RequestMapping("/add")
-    String addUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int age) {
-        if (isFilled(firstName)) {
-            userRepository.addUser(new User(firstName, lastName, age));
-            return "redirect:/success.html";
-        } else {
-            return "redirect:/error.html";
+    String addUser(@RequestParam(required = false) String firstName, @RequestParam String lastName, @RequestParam int age) {
+        if (firstName != null) {
+            if (isFilled(firstName)) {
+                userRepository.addUser(new User(firstName, lastName, age));
+                return "redirect:/success.html";
+            }
         }
+        return "redirect:/error.html";
     }
 
     private boolean isFilled(String firstName) {
